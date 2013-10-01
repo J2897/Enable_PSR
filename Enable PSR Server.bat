@@ -21,7 +21,7 @@ set CP=%COMPUTERNAME%
 ::set CN=test.com
 set CA_CERT="%CD%\Certificates\ca.p7b"
 set PSR_SERVER_CERT="%CD%\Certificates\server.p12"
-set PSR_SERVER_CERT_PASSWORD=password123
+set DEFAULT_PSR_SERVER_CERT_PASSWORD=password123
 set PSR_SERVER_PORT=5986
 
 for /F "tokens=2 delims=:" %%i in ('"ipconfig | findstr IPv4"') do set LOCAL_IP=%%i
@@ -43,14 +43,14 @@ echo  2. Import Server Certificate.
 echo  3. Configure WinRM with HTTPS and default settings.
 echo  4. Create the WinRM HTTPS Listener.
 echo  5. View Listeners.
-echo  6. Add "TrustedHosts".
-echo  7. Add firewall entry.
+echo  6. Show SSL Certificate bindings.
+echo  7. Add Firewall entry.
 echo  8. Exit.
 echo.
 choice /C:12345678 /T 120 /D 8 /M "Which number"
 if ERRORLEVEL 8 goto :end
 if ERRORLEVEL 7 goto :add_firewall_entry
-if ERRORLEVEL 6 goto :add_TrustedHosts
+if ERRORLEVEL 6 goto :show_SSL_bindings
 if ERRORLEVEL 5 goto :view_listeners
 if ERRORLEVEL 4 goto :create_listener
 if ERRORLEVEL 3 goto :configure_WinRM
@@ -73,6 +73,11 @@ goto :start
 :import_server_cert
 cls
 echo Importing PSR Server Certificate . . .
+echo.
+echo Please enter the password that you used to encrypt the Private Key with 
+echo during the process of exporting the 'server.p12' file. Or to accept the default
+set /P PSR_SERVER_CERT_PASSWORD="password (%DEFAULT_PSR_SERVER_CERT_PASSWORD%) just press 'Enter': "
+if "%PSR_SERVER_CERT_PASSWORD%" == "" (set PSR_SERVER_CERT_PASSWORD=%DEFAULT_PSR_SERVER_CERT_PASSWORD%)
 if exist %PSR_SERVER_CERT% (certutil.exe -importPFX -p %PSR_SERVER_CERT_PASSWORD% %PSR_SERVER_CERT%) else (echo File not found: %PSR_SERVER_CERT%)
 echo.
 echo %RETURN%
@@ -115,9 +120,31 @@ if %STRLEN% NEQ 40 (
 	pause > nul
 	goto :create_listener
 )
+
+:choose_hostname
+cls
+echo ^<^<^<    Released under the GNU General Public License version 3 by J2897.     ^>^>^>
+REM Count Personal certificates.
+for /F "delims=" %%a in ('certutil -store my^| find /C "Subject: CN="') do set PERSONAL_CERTS=%%a
+echo Number of Personal certificates: [ %PERSONAL_CERTS% ]
+echo.
+echo Set the Listener's Hostname:
+echo.
+echo  1. Computer's name (%CP%).
+echo  2. Local IPv4 address (%LOCAL_IP%).
+echo  3. Manually enter the Listener's Hostname.
+if "%PERSONAL_CERTS%" == "1" (goto :get_CN) else (echo  4. Exit.)
+:cont_choose_hostname
+echo.
+choice /C:12345 /T 120 /D 4 /M "Which number"
+if ERRORLEVEL 5 goto :end
+if ERRORLEVEL 4 if "%PERSONAL_CERTS%" == "1" (set HOST=%CN%) else (goto :end)
+if ERRORLEVEL 3 (echo.) & (set /P HOST="Please enter the Listener's Hostname: ")
+if ERRORLEVEL 2 set HOST=%LOCAL_IP%
+if ERRORLEVEL 1 set HOST=%CP%
 echo.
 echo To get back to this window, type "exit" in the other window.
-start /w /i winrm create winrm/config/Listener?Address=*+Transport=HTTPS @{Hostname="%CN%";CertificateThumbprint="%THUMB%";Port="%PSR_SERVER_PORT%"}
+start /w /i winrm create winrm/config/Listener?Address=*+Transport=HTTPS @{Hostname="%HOST%";CertificateThumbprint="%THUMB%";Port="%PSR_SERVER_PORT%"}
 echo.
 echo %RETURN%
 pause > nul
@@ -134,12 +161,10 @@ echo %RETURN%
 pause > nul
 goto :start
 
-:add_TrustedHosts
+:show_SSL_bindings
 cls
-echo Adding TrustedHosts . . .
-echo.
-echo To get back to this window, type "exit" in the other window.
-start /w /i winrm set winrm/config/client @{TrustedHosts="*"}
+echo Showing SSL Certificate bindings . . .
+netsh http show sslcert
 echo.
 echo %RETURN%
 pause > nul
@@ -164,3 +189,14 @@ setlocal enabledelayedexpansion
 if not "!%1:~%LEN%!"=="" set /A LEN+=1 & goto :loop
 (endlocal && set %2=%LEN%)
 exit /b 0
+
+:get_CN
+REM Get Subject line.
+for /F "delims=" %%a in ('certutil -store my^| find "Subject: CN="') do set SUBJECT=%%a
+REM Divide using '=' as the separator and take the 2nd group of characters.
+for /f "tokens=2 delims=^=" %%a in ("%SUBJECT%") do set CN=%%a
+REM Divide using ',' as the separator and take the 1st group of characters.
+for /f "tokens=1 delims=," %%a in ("%CN%") do set CN=%%a
+echo  4. [Recommended] The Personal cert's Subject CN field ^(%CN%^).
+echo  5. Exit.
+goto :cont_choose_hostname
