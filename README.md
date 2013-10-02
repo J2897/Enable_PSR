@@ -37,9 +37,11 @@ Here's an example of what to type in PowerShell on your Client machine when you'
 
 	Enter-PSSession -ComputerName "Win7-VM" -CertificateThumbprint "7ed98cd790862135f2d078c783a6e399549a4323" -UseSSL
 
+The Thumbprint should be the Thumbprint of your Client certificate.
+
 After you have finished playing, be sure to create four new certificates in the latest version of OpenSSL for security reasons.
 
-[XCA] [1] will allow you to export the OpenSSL config file so that you don't have to type out your certicate's information again.
+XCA will allow you to export the OpenSSL config file so that you don't have to type out your certicate's information again.
 
    [1]: http://xca.sourceforge.net/xca-14.html#ss14.1
    [2]: http://xca.sourceforge.net/xca.html#toc11
