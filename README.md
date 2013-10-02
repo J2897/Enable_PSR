@@ -8,7 +8,7 @@ First, you will need to create a CA certificate, a Client certificate, a Server 
 
 When you choose the 'Import' options, these three files will be expected to exist in the Certificates folder:
 
-1.  **ca.p7b** *(Local Computer Account > Trusted Root Certification Authorities)*
+1.  **ca.p7b** *Local Computer Account > Trusted Root Certification Authorities*
 2.  **client.p12** *Local Computer Account > Personal*
 3.  **server.p12** *Local Computer Account > Personal*
 
@@ -27,11 +27,11 @@ You will also need to [Generate a CRL] [2] certificate (**crl.der**) and simply 
 
 In your web-host's root folder, create a folder name **crl** and then upload the **crl.der** file to that folder. Example:
 
-		http://www.example.com/crl/crl.der
+	http://www.example.com/crl/crl.der
 
-	**example.com* can be any web-address and does not have to be related, nor similar, to any address used for PSR!*
+**example.com* can be any web-address and does not have to be related, nor similar, to any address used for PSR!*
 
-The above example URI is also what you should enter as the `CRL distribution point` on all of your certificates in XCA.
+The above example URI is also what you should set as the `CRL distribution point` on all of your certificates in XCA.
 
 Here's an example of what to type in PowerShell on your Client machine when you're ready to establish a connection with your Server:
 
