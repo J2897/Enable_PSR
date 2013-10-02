@@ -4,4 +4,4 @@ ca.p7b
 client.p12
 server.p12
 
-And set the PSR_SERVER_CERT_PASSWORD varible to the password you used to export.
+And set the DEFAULT_PSR_SERVER_CERT_PASSWORD varible to the password you used to export.

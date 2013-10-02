@@ -2,26 +2,37 @@ Enable_PSR
 ==========
 *Released under the GNU General Public License version 3 by J2897.*
 
-Enables PowerShell Remoting on Windows 7 with HTTPS.
+Enables PSR (PowerShell Remoting) on Windows 7 with HTTPS.
 
-First, you will need to create a CA certificate, a Client certificate and a Server certificate.
+First, you will need to create a CA certificate, a Client certificate, a Server certificate and a CRL certificate.
 
 When you choose the 'Import' options, these three files will be expected to exist in the Certificates folder:
 
-1.  **ca.p7b**
-2.  **client.p12**
-3.  **server.p12**
+1.  **ca.p7b** *(Local Computer Account > Trusted Root Certification Authorities)*
+2.  **client.p12** *(Local Computer Account > Personal)*
+3.  **server.p12** *(Local Computer Account > Personal)*
 
 You can create your test certificates easily with [XCA] [1].
 
 Be aware though that [XCA] [1] isn't currently using the latest version of OpenSSL.
 
+You will also need to [Generate a CRL] [2] certificate and upload it to a web-host. You can export the **crl.der** file from  [XCA] [1], and simply upload it to any web-host using FTP.
+
+In your web-host's root folder, create a folder name **crl** and then upload the **crl.der** file to that folder. Example:
+
+	http://www.example.com/crl/crl.der
+
+*example.com* can be any web-address and does not have to be related nor similar to any address used for PSR.
+
+The above example is also what you should enter as the `CRL distribution point` on all of your certificates.
+
 Here's an example of what to type in PowerShell on your Client machine when you're ready to establish a connection with your Server:
 
 	Enter-PSSession -ComputerName "Win7-VM" -CertificateThumbprint "7ed98cd790862135f2d078c783a6e399549a4323" -UseSSL
 
-After you have finished playing, be sure to create three new certificates in the latest version of OpenSSL for security reasons.
+After you have finished playing, be sure to create four new certificates in the latest version of OpenSSL for security reasons.
 
 [XCA] [1] will allow you to export the OpenSSL config file so that you don't have to type out your certicate's information again.
 
    [1]: http://xca.sourceforge.net/xca-14.html#ss14.1
+   [2]: http://xca.sourceforge.net/xca.html#toc11
