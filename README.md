@@ -41,7 +41,7 @@ The Thumbprint should be the Thumbprint of your Client certificate.
 
 After you have finished playing, be sure to create four new certificates in the latest version of OpenSSL for security reasons.
 
-XCA will allow you to export the OpenSSL config file so that you don't have to type out your certicate's information again.
+XCA will allow you to export the OpenSSL config file so that you don't have to type out your certicates' information again.
 
    [1]: http://xca.sourceforge.net/xca-14.html#ss14.1
    [2]: http://xca.sourceforge.net/xca.html#toc11
