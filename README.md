@@ -29,7 +29,7 @@ In your web-host's root folder, create a new folder named **crl** and then uploa
 
 	http://www.example.com/crl/crl.der
 
-**example.com* can be any web-address and does not have to be related, nor similar, to any address used for PSR!*
+*www.example.com* can be any web-address and does not have to be related, nor similar, to any address used for PSR!
 
 The above example URI is also what you should set as the `CRL distribution point` on all of your certificates in XCA.
 
