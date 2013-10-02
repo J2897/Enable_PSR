@@ -23,7 +23,7 @@ If you want to delete a certifacte, run *mmc.exe* and do as follows:
 5.  Select 'Computer account'.
 6.  Click 'Finish'.
 
-You will also need to [Generate a CRL] [2] certificate (**crl.der**) and simply upload it to *any* web-host via FTP.
+You will also need to [Generate a CRL] [2] certificate (crl.der) and simply upload it to *any* web-host via FTP.
 
 In your web-host's root folder, create a folder name **crl** and then upload the **crl.der** file to that folder. Example:
 
