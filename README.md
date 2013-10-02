@@ -8,16 +8,16 @@ First, you will need to create a CA certificate, a Client certificate, a Server 
 
 When you choose the 'Import' options, these three files will be expected to exist in the Certificates folder:
 
-1.  **ca.p7b** *Local Computer Account > Trusted Root Certification Authorities*
-2.  **client.p12** *Local Computer Account > Personal*
-3.  **server.p12** *Local Computer Account > Personal*
+1.  **ca.p7b** (This imports to: *Local Computer Account > Trusted Root Certification Authorities*)
+2.  **client.p12** (This imports to: *Local Computer Account > Personal*)
+3.  **server.p12** (This imports to: *Local Computer Account > Personal*)
 
 You can create your test certificates easily with [XCA] [1]. *Be aware though that XCA isn't currently using the latest version of OpenSSL!*
 
-If you want to delete a certifacte, run *mmc.exe* and do as follows:
+If you want to delete a certificate, run **mmc.exe** and do as follows:
 
-1.  Click 'File'
-2.  Click 'Add/Remove Snap-in...'
+1.  Click 'File'.
+2.  Click 'Add/Remove Snap-in...'.
 3.  Add 'Certificates'.
 4.  Click 'OK'.
 5.  Select 'Computer account'.
