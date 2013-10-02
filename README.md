@@ -18,7 +18,7 @@ Be aware though that [XCA] [1] isn't currently using the latest version of OpenS
 
 Here's an example of what to type in PowerShell on your Client machine when you're ready to establish a connection with your Server:
 
-		Enter-PSSession -ComputerName "Win7-VM" -CertificateThumbprint "7ed98cd790862135f2d078c783a6e399549a4323" -UseSSL
+	Enter-PSSession -ComputerName "Win7-VM" -CertificateThumbprint "7ed98cd790862135f2d078c783a6e399549a4323" -UseSSL
 
 After you have finished playing, be sure to create three new certificates in the latest version of OpenSSL for security reasons.
 
