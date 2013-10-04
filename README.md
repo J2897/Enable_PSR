@@ -32,7 +32,7 @@ When you choose the 'Import' options in *Enable PSR*, these three files will be 
 
 	Imports to: *Local Computer Account > Personal*
 
-	***WARNING:*** *The Client certificate contains your Private Key. If you accidentally import it to a Server, your Mum's PC for example, then you're Mum may be able to utilise it to hack all of the other Servers that are/were under your control - which would be pretty freaking hilarious!*
+	***WARNING:*** *The Client certificate contains your Private Key. If you accidentally import it to a Server, your Mum's PC for example, then your Mum may be able to utilise it to hack all of the other Servers that are/were under your control - which would be pretty freaking hilarious!*
 
 You can create your test certificates easily with [XCA] [1]. But you should be aware that, although XCA uses OpenSSL, XCA isn't currently using the latest version of OpenSSL. So if you plan on using PSR over the internet, you should really create your certificates using the latest version of OpenSSL - scroll down for links.
 
@@ -64,6 +64,9 @@ The Thumbprint should be the Thumbprint of your Client certificate.
 After you have finished playing, be sure to create four new certificates in the latest version of OpenSSL for security reasons.
 
 XCA will allow you to export the [OpenSSL config file] [6] so that you don't have to type out your certificates' information again.
+
+OpenSSL
+-------
 
 There are at least two ways to install OpenSSL on Windows:
 
