@@ -24,7 +24,7 @@ When you choose the 'Import' options in *Enable PSR*, these three files will be 
 
 	Imports to: *Local Computer Account > Trusted Root Certification Authorities*
 
-*	**server.p12** - This is the Server certificate which you must create and it is to be imported on the Server machine(s).
+*	**server.p12** - This is the Server certificate which you must create and it is to be imported on the Server machine(s); each Server requires its own, unique, Server certificate.
 
 	Imports to: *Local Computer Account > Personal*
 
