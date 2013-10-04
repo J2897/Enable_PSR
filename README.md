@@ -11,14 +11,14 @@ Prerequisites
 
 You will need the following beforehand:
 
-* [XCA] [1]
+* [XCA] [1] - This will create all of your certificates for free.
 
 How to use
 ----------
 
 First, create a ***CA*** certificate, a ***Client*** certificate, a ***Server*** certificate and a ***CRL*** certificate.
 
-When you choose the 'Import' options in *Enable PSR*, these three files will be expected to exist in the Certificates folder:
+When you choose the 'Import' options in *Enable PSR*, these three files will be expected to exist in the `Certificates` folder:
 
 *	**ca.p7b** - This is the CA certificate which you must create and it is to be imported on both the Client and Server machines.
 
@@ -75,4 +75,4 @@ There are at least two ways to install OpenSSL on Windows:
    [3]: http://xca.sourceforge.net/xca-9.html#ss9.5
    [4]: http://slproweb.com/products/Win32OpenSSL.html
    [5]: http://robotification.com/2007/08/31/installing-openssl-on-windows/
-   [6]: https://www.openssl.org/docs/apps/config.html
+   [6]: http://www.openssl.org/docs/apps/config.html
