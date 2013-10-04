@@ -16,7 +16,7 @@ You will need the following beforehand:
 How to use
 ----------
 
-First, you will need to create a CA certificate, a Client certificate, a Server certificate and a CRL certificate.
+First, create a ***CA*** certificate, a ***Client*** certificate, a ***Server*** certificate and a ***CRL*** certificate.
 
 When you choose the 'Import' options in *Enable PSR*, these three files will be expected to exist in the Certificates folder:
 
@@ -63,8 +63,16 @@ The Thumbprint should be the Thumbprint of your Client certificate.
 
 After you have finished playing, be sure to create four new certificates in the latest version of OpenSSL for security reasons.
 
-XCA will allow you to export the OpenSSL config file so that you don't have to type out your certificates' information again.
+XCA will allow you to export the [OpenSSL config file] [6] so that you don't have to type out your certificates' information again.
+
+There are at least two ways to install OpenSSL on Windows:
+
+* [Win32 OpenSSL] [4]
+* [Cygwin] [5]
 
    [1]: http://xca.sourceforge.net/xca-14.html#ss14.1
    [2]: http://xca.sourceforge.net/xca.html#toc11
    [3]: http://xca.sourceforge.net/xca-9.html#ss9.5
+   [4]: http://slproweb.com/products/Win32OpenSSL.html
+   [5]: http://robotification.com/2007/08/31/installing-openssl-on-windows/
+   [6]: https://www.openssl.org/docs/apps/config.html
