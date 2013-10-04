@@ -20,18 +20,18 @@ First, you will need to create a CA certificate, a Client certificate, a Server 
 
 When you choose the 'Import' options in *Enable PSR*, these three files will be expected to exist in the Certificates folder:
 
-*	**ca.p7b**
-	This is the CA certificate which you must create and it needs to be imported on both the Client and Server machines.
+*	**ca.p7b** - This is the CA certificate which you must create and it needs to be imported on both the Client and Server machines.
+
 	Imports to: *Local Computer Account > Trusted Root Certification Authorities*
 
-*	**client.p12**
-	This is the Client certificate which you must create and it needs to be imported on the Client machine only.
+*	**client.p12** - This is the Client certificate which you must create and it needs to be imported on the Client machine only.
+
 	Imports to: *Local Computer Account > Personal*
 
-	***WARNING:** The Client certificate contains your Private Key. If you accidentally import it to a Server, your Mum's PC for example, then you're Mum may be able to utilise it to hack all of the other Servers that are/were under your control - which would be pretty freaking hilarious!*
+	***WARNING:*** *The Client certificate contains your Private Key. If you accidentally import it to a Server, your Mum's PC for example, then you're Mum may be able to utilise it to hack all of the other Servers that are/were under your control - which would be pretty freaking hilarious!*
 
-*	**server.p12**
-	This is the Server certificate which you must create and it needs to be imported on the Server machine.
+*	**server.p12** - This is the Server certificate which you must create and it needs to be imported on the Server machine.
+
 	Imports to: *Local Computer Account > Personal*
 
 You can create your test certificates easily with [XCA] [1]. But you should be aware that, although XCA uses OpenSSL, XCA isn't currently using the latest version of OpenSSL. So if you plan on using PSR over the internet, you should really create your certificates using the latest version of OpenSSL.
