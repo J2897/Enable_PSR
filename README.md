@@ -34,7 +34,7 @@ When you choose the 'Import' options in *Enable PSR*, these three files will be 
 
 	***WARNING:*** *The Client certificate contains your Private Key. If you accidentally import it to a Server, your Mum's PC for example, then you're Mum may be able to utilise it to hack all of the other Servers that are/were under your control - which would be pretty freaking hilarious!*
 
-You can create your test certificates easily with [XCA] [1]. But you should be aware that, although XCA uses OpenSSL, XCA isn't currently using the latest version of OpenSSL. So if you plan on using PSR over the internet, you should really create your certificates using the latest version of OpenSSL.
+You can create your test certificates easily with [XCA] [1]. But you should be aware that, although XCA uses OpenSSL, XCA isn't currently using the latest version of OpenSSL. So if you plan on using PSR over the internet, you should really create your certificates using the latest version of OpenSSL - scroll down for links.
 
 If you want to delete a certificate, run **mmc.exe** and do as follows:
 
