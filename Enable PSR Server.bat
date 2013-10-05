@@ -45,10 +45,12 @@ echo  4. Create the WinRM HTTPS Listener.
 echo  5. View Listeners.
 echo  6. Show SSL Certificate bindings.
 echo  7. Add Firewall entry.
-echo  8. Exit.
+echo  8. Run 'mmc.exe'.
+echo  9. Exit.
 echo.
-choice /C:12345678 /T 120 /D 8 /M "Which number"
-if ERRORLEVEL 8 goto :end
+choice /C:123456789 /N /T 300 /D 9 /M "Which number?: "
+if ERRORLEVEL 9 goto :end
+if ERRORLEVEL 8 goto :mmc_exe
 if ERRORLEVEL 7 goto :add_firewall_entry
 if ERRORLEVEL 6 goto :show_SSL_bindings
 if ERRORLEVEL 5 goto :view_listeners
@@ -64,6 +66,7 @@ goto :start
 :import_CA_cert
 cls
 echo Importing CA Certificate . . .
+echo.
 if exist %CA_CERT% (certutil.exe -addstore -enterprise Root %CA_CERT%) else (echo File not found: %CA_CERT%)
 echo.
 echo %RETURN%
@@ -173,6 +176,17 @@ goto :start
 :add_firewall_entry
 cls
 netsh advfirewall firewall add rule name="WinRM via HTTPS - Open Port %PSR_SERVER_PORT%" protocol=TCP dir=in localport=%PSR_SERVER_PORT% action=allow
+echo.
+echo %RETURN%
+pause > nul
+goto :start
+
+:mmc_exe
+cls
+echo Launching MMC (Microsoft Management Console) . . .
+echo.
+echo To get back to this window, close the MMC window.
+"%SYSTEMROOT%\System32\mmc.exe"
 echo.
 echo %RETURN%
 pause > nul
