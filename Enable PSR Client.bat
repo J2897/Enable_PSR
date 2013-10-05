@@ -20,7 +20,7 @@ if %ERRORLEVEL% == 0 (
 set CP=%COMPUTERNAME%
 set CA_CERT="%CD%\Certificates\ca.p7b"
 set PSR_CLIENT_CERT="%CD%\Certificates\client.p12"
-set PSR_CLIENT_CERT_PASSWORD=password123
+set DEFAULT_PSR_CLIENT_CERT_PASSWORD=password123
 
 for /F "tokens=2 delims=:" %%i in ('"ipconfig | findstr IPv4"') do set LOCAL_IP=%%i
 set LOCAL_IP=%LOCAL_IP: =%
@@ -38,10 +38,12 @@ echo.
 echo  1. Import CA Certificate.
 echo  2. Import Client Certificate.
 echo  3. Enable PSR Client.
-echo  4. Exit.
+echo  4. Run 'mmc.exe'.
+echo  5. Exit.
 echo.
-choice /C:1234 /T 120 /D 4 /M "Which number"
-if ERRORLEVEL 4 goto :end
+choice /C:12345 /T 120 /D 4 /M "Which number"
+if ERRORLEVEL 5 goto :end
+if ERRORLEVEL 4 goto :mmc_exe
 if ERRORLEVEL 3 goto :enable_PSR_client
 if ERRORLEVEL 2 goto :import_client_cert
 if ERRORLEVEL 1 goto :import_CA_cert
@@ -53,6 +55,7 @@ goto :start
 :import_CA_cert
 cls
 echo Importing CA Certificate . . .
+echo.
 if exist %CA_CERT% (certutil.exe -addstore -enterprise Root %CA_CERT%) else (echo File not found: %CA_CERT%)
 echo.
 echo %RETURN%
@@ -62,6 +65,11 @@ goto :start
 :import_client_cert
 cls
 echo Importing PSR Client Certificate . . .
+echo.
+echo Please enter the password that you used to encrypt the Private Key with 
+echo during the process of exporting the 'client.p12' file. Or to accept the default
+set /P PSR_CLIENT_CERT_PASSWORD="password (%DEFAULT_PSR_CLIENT_CERT_PASSWORD%) just press 'Enter': "
+if "%PSR_CLIENT_CERT_PASSWORD%" == "" (set PSR_CLIENT_CERT_PASSWORD=%DEFAULT_PSR_CLIENT_CERT_PASSWORD%)
 if exist %PSR_CLIENT_CERT% (certutil.exe -importPFX -p %PSR_CLIENT_CERT_PASSWORD% %PSR_CLIENT_CERT%) else (echo File not found: %PSR_CLIENT_CERT%)
 echo.
 echo %RETURN%
@@ -128,7 +136,20 @@ if "%TEMP_ENABLED_LATFP%" == "1" (
 
 echo.
 echo Assuming there's no problem with your certificates, your PC should now be able 
-echo to talk to PowerShell Remoting servers.
+echo to talk to PowerShell Remoting servers. If there is a problem with your
+echo certificates, then as soon as you've fixed them, you'll be good to go. You will
+echo not have to run this a second time.
+echo.
+echo %RETURN%
+pause > nul
+goto :start
+
+:mmc_exe
+cls
+echo Launching MMC (Microsoft Management Console) . . .
+echo.
+echo To get back to this window, close the MMC window.
+"%SYSTEMROOT%\System32\mmc.exe"
 echo.
 echo %RETURN%
 pause > nul
