@@ -41,9 +41,10 @@ If you want to delete a certificate, run **mmc.exe** and do as follows:
 1.  Click 'File'.
 2.  Click 'Add/Remove Snap-in...'.
 3.  Add 'Certificates'.
-4.  Click 'OK'.
-5.  Select 'Computer account'.
+4.  Select 'Computer account'.
+5.  Click 'Next'.
 6.  Click 'Finish'.
+7.  Click 'OK'.
 
 After you [Generate a CRL] [2] certificate (crl.der), simply upload it to *any* web-host via FTP.
 

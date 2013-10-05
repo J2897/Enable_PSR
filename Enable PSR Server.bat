@@ -80,6 +80,9 @@ echo.
 echo Please enter the password that you used to encrypt the Private Key with 
 echo during the process of exporting the 'server.p12' file. Or to accept the default
 set /P PSR_SERVER_CERT_PASSWORD="password (%DEFAULT_PSR_SERVER_CERT_PASSWORD%) just press 'Enter': "
+cls
+echo Importing PSR Server Certificate . . .
+echo.
 if "%PSR_SERVER_CERT_PASSWORD%" == "" (set PSR_SERVER_CERT_PASSWORD=%DEFAULT_PSR_SERVER_CERT_PASSWORD%)
 if exist %PSR_SERVER_CERT% (certutil.exe -importPFX -p %PSR_SERVER_CERT_PASSWORD% %PSR_SERVER_CERT%) else (echo File not found: %PSR_SERVER_CERT%)
 echo.
