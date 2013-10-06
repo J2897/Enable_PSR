@@ -32,7 +32,7 @@ echo  1. Enable a Client.
 echo  2. Enable a Server.
 echo  3. Exit.
 echo.
-choice /C:123 /T 120 /D 3 /M "Which number"
+choice /C:123 /N /T 300 /D 3 /M "Which number?: "
 if ERRORLEVEL 3 goto :end
 if ERRORLEVEL 2 call "%CD%\Enable PSR Server.bat"
 if ERRORLEVEL 1 call "%CD%\Enable PSR Client.bat"
