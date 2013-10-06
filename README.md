@@ -60,7 +60,7 @@ Here's an example of what to type in PowerShell on your Client machine when you'
 
 	Enter-PSSession -ComputerName "Win7-VM" -CertificateThumbprint "7ed98cd790862135f2d078c783a6e399549a4323" -UseSSL
 
-The Thumbprint should be the Thumbprint of your Client certificate.
+The Thumbprint should be the Thumbprint of your Client certificate, and the Computer Name should be the Computer Name of the computer you're trying to connect to.
 
 After you have finished playing, be sure to create four new certificates in the latest version of OpenSSL for security reasons.
 
