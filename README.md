@@ -36,7 +36,30 @@ When you choose the 'Import' options in *Enable PSR*, these three files will be 
 
 You can create your test certificates easily with [XCA] [1]. But you should be aware that, although XCA uses OpenSSL, XCA isn't currently using the latest version of OpenSSL. So if you plan on using PSR over the internet, you should really create your certificates using the latest version of OpenSSL - scroll down for links.
 
-If you want to delete a certificate, run **mmc.exe** and do as follows:
+Enable a Client
+---------------
+
+1.  Put the ***CA*** certificate and the ***Client*** certificate in the `Certificates` folder.
+
+2.  Run `Enable PSR Client.bat` and choose options 1, 2 and 3.
+
+Easy..? You can also launch the MMC by selecting option 4 to verify that your certificates were imported - and if you double-click on your Client certificate, click on the `Details` tab and scroll down, you will see the Thumbprint which you'll need later.
+
+Enable a Server
+---------------
+
+1.  Put the ***CA*** certificate and the ***Server*** certificate in the `Certificates` folder.
+
+2.  Run `Enable PSR Server.bat` and choose options 1, 2, 3 and 7.
+
+	***NOTE:*** *Option 7 is only necessary if you're using the Windows Firewall.*
+
+If you got an error when you ran option number 3 alerting you that it wasn't possible to automatically create the Listener, you may still be able to create the Listener using option number 4.
+
+MMC (Microsoft Management Console)
+----------------------------------
+
+If you want to delete a certificate, or to verify that a certificate has been imported, run **mmc.exe** and do as follows:
 
 1.  Click 'File'.
 2.  Click 'Add/Remove Snap-in...'.
@@ -45,6 +68,9 @@ If you want to delete a certificate, run **mmc.exe** and do as follows:
 5.  Click 'Next'.
 6.  Click 'Finish'.
 7.  Click 'OK'.
+
+CRL (Certificate Revocation List)
+---------------------------------
 
 After you [Generate a CRL] [2] certificate (crl.der), simply upload it to *any* web-host via FTP.
 
@@ -55,6 +81,9 @@ In your web-host's root folder, create a new folder named **crl** and then uploa
 *www.example.com* can be any web-address and does not have to be related, nor similar, to any address used for PSR.
 
 The above example URI is also what you should set as the `CRL distribution point` on all of your certificates in XCA.
+
+Connecting to a Server
+----------------------
 
 Here's an example of what to type in PowerShell on your Client machine when you're ready to establish a connection with your Server:
 
