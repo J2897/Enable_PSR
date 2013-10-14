@@ -100,12 +100,16 @@ OpenSSL
 
 There are at least two ways to install OpenSSL on Windows:
 
-* [Win32 OpenSSL] [4]
-* [Cygwin] [5]
+* [Win32 OpenSSL] [3]
+* [Cygwin] [4]
+
+Instructions on how to use OpenSSL:
+
+* [Simple OpenSSL Commands] [5]
 
    [1]: http://xca.sourceforge.net/xca-14.html#ss14.1
    [2]: http://xca.sourceforge.net/xca.html#toc11
-   [3]: http://xca.sourceforge.net/xca-9.html#ss9.5
-   [4]: http://slproweb.com/products/Win32OpenSSL.html
-   [5]: http://robotification.com/2007/08/31/installing-openssl-on-windows/
+   [3]: http://slproweb.com/products/Win32OpenSSL.html
+   [4]: http://robotification.com/2007/08/31/installing-openssl-on-windows/
+   [5]: http://datacenteroverlords.com/2012/03/01/creating-your-own-ssl-certificate-authority/
    [6]: http://www.openssl.org/docs/apps/config.html
