@@ -131,7 +131,7 @@ if %STRLEN% NEQ 40 (
 cls
 echo ^<^<^<    Released under the GNU General Public License version 3 by J2897.     ^>^>^>
 REM Count Personal certificates.
-for /F "delims=" %%a in ('certutil -store my^| find /C "Subject: CN="') do set PERSONAL_CERTS=%%a
+for /F "delims=" %%a in ('certutil -store my^| find /C "Subject: "') do set PERSONAL_CERTS=%%a
 echo Number of Personal certificates: [ %PERSONAL_CERTS% ]
 echo.
 echo Set the Listener's Hostname:
@@ -142,12 +142,13 @@ echo  3. Manually enter the Listener's Hostname.
 if "%PERSONAL_CERTS%" == "1" (goto :get_CN) else (echo  4. Exit.)
 :cont_choose_hostname
 echo.
-choice /C:12345 /T 120 /D 4 /M "Which number"
+choice /C:12345 /N /T 300 /D 5 /M "Which number?: "
 if ERRORLEVEL 5 goto :end
-if ERRORLEVEL 4 if "%PERSONAL_CERTS%" == "1" (set HOST=%CN%) else (goto :end)
+if ERRORLEVEL 4 if "%PERSONAL_CERTS%" == "1" (set HOST=%CN%) & (goto :hostname_chosen) else (goto :end)
 if ERRORLEVEL 3 (echo.) & (set /P HOST="Please enter the Listener's Hostname: ")
 if ERRORLEVEL 2 set HOST=%LOCAL_IP%
 if ERRORLEVEL 1 set HOST=%CP%
+:hostname_chosen
 echo.
 echo To get back to this window, type "exit" in the other window.
 start /w /i winrm create winrm/config/Listener?Address=*+Transport=HTTPS @{Hostname="%HOST%";CertificateThumbprint="%THUMB%";Port="%PSR_SERVER_PORT%"}
@@ -209,11 +210,13 @@ exit /b 0
 
 :get_CN
 REM Get Subject line.
-for /F "delims=" %%a in ('certutil -store my^| find "Subject: CN="') do set SUBJECT=%%a
-REM Divide using '=' as the separator and take the 2nd group of characters.
-for /f "tokens=2 delims=^=" %%a in ("%SUBJECT%") do set CN=%%a
+for /F "delims=" %%a in ('certutil -store my^| find "Subject: "') do set SUBJECT=%%a
+REM Remove " CN" and everything before it.
+set SUBJECT=%SUBJECT:* CN=%
+REM Remove the first char ("=") from the beginning.
+set SUBJECT=%SUBJECT:~+1%
 REM Divide using ',' as the separator and take the 1st group of characters.
-for /f "tokens=1 delims=," %%a in ("%CN%") do set CN=%%a
+for /f "tokens=1 delims=," %%a in ("%SUBJECT%") do set CN=%%a
 echo  4. [Recommended] The Personal cert's Subject CN field ^(%CN%^).
 echo  5. Exit.
 goto :cont_choose_hostname
