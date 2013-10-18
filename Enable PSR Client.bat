@@ -41,7 +41,7 @@ echo  3. Enable PSR Client.
 echo  4. Run 'mmc.exe'.
 echo  5. Exit.
 echo.
-choice /C:12345 /N /T 300 /D 5 /M "Which number:? "
+choice /C:12345 /N /T 300 /D 5 /M "Which number?: "
 if ERRORLEVEL 5 goto :end
 if ERRORLEVEL 4 goto :mmc_exe
 if ERRORLEVEL 3 goto :enable_PSR_client
