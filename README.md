@@ -16,7 +16,7 @@ You will need the following beforehand:
 How to use
 ----------
 
-First, create a ***CA*** certificate, a ***Client*** certificate, a ***Server*** certificate and a ***CRL*** certificate.
+First, create a **CA** certificate, a **Client** certificate, a **Server** certificate and a **CRL** certificate.
 
 When you choose the 'Import' options in *Enable PSR*, these three files will be expected to exist in the `Certificates` folder:
 
@@ -39,7 +39,7 @@ You can create your test certificates easily with [XCA] [1]. But you should be a
 Enable a Client
 ---------------
 
-1.  Put the ***CA*** certificate and the ***Client*** certificate in the `Certificates` folder.
+1.  Put the **CA** certificate and the **Client** certificate in the `Certificates` folder.
 
 2.  Run `Enable PSR Client.bat` and choose options 1, 2 and 3.
 
@@ -48,7 +48,7 @@ Easy..? You can also launch the MMC by selecting option 4 to verify that your ce
 Enable a Server
 ---------------
 
-1.  Put the ***CA*** certificate and the ***Server*** certificate in the `Certificates` folder.
+1.  Put the **CA** certificate and the **Server** certificate in the `Certificates` folder.
 
 2.  Run `Enable PSR Server.bat` and choose options 1, 2, 3 and 7.
 
